@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/1e35721f07.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="\css\styles.css">
+    <title>Kanye-as-a-Servie🌊</title>
+</head>
+
+<body>
+    <div class="page_1">
+
+
+        <div class="CONTENT_1">
+            <div class="leftside">
+                <div class="title">
+                    <h1 id="title">Kanye 🌊</h1>
+                    <div class="scribble">
+                        <img class="small_head_hero" src="/img/service.svg" alt="hero_img_1">
+                    </div>
+                </div>
+
+
+                <h2>In doubt? Need inspiration?
+                    Wondering, what would Kanye say?
+                    We've got you. Thanks to <a href="https://kanye.rest/"> Kanye.Rest API</a>
+                    now you can make your brain hurt just by reading Kanye's quotes right here! ↓
+                </h2>
+            </div>
+
+            <div class="placeholder">
+                <img class="hero" src="/img/guy-1.gif" alt="hero_img_1">
+            </div>
+        </div>
+
+        <div id="scroll_pls">Scroll - </div>
+    </div>
+    <!-- <button class="action_btn">ENTER</button> -->
+
+
+    <div class="page_2">
+        <div class="hr">
+        </div>
+        <div class="page2_title">
+            <h2>Random Quotes</h2>
+            <button onclick="refreshCards()" class="refresh"> <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+
+        <div class="cards" id="test">
+
+
+            <div class="div_card">
+                <p class="card" id="card1"></p>
+            </div>
+            <div class="div_card">
+                <p class="card" id="card2"></p>
+            </div>
+            <div class="div_card">
+                <p class="card" id="card3"></p>
+            </div>
+        </div>
+        <script>
+
+
+            var quoteArray = [];
+            var list = document.getElementsByClassName("card");
+            function getQuote() {
+                fetch("https://api.kanye.rest").then(
+                    res => {
+                        res.json().then(
+                            data => {
+
+                                const quoteObj = data;
+                                const quote = quoteObj.quote;
+                                if (quote.length > 0) {
+                                    quoteArray.push(quote + " ©");
+                                    console.log("success")
+                                    let idx = quoteArray.length - 1;
+                                    console.log(idx)
+                                    list[idx].innerHTML = quoteArray[idx];
+                                    
+                                }
+
+                            }
+
+                        )
+
+                    });
+            }
+
+            //console.log(quoteArray);
+
+
+            console.log(list[0], list[1])
+            for (var i = 0; i < list.length; i++) {
+                getQuote()
+            }
+
+            function refreshCards(){
+                quoteArray = [];
+                for (var i = 0; i < list.length; i++) {
+                getQuote()
+            }  
+            }
+
+
+            console.log(quoteArray.length + " hello");
+
+
+        </script>
+    </div>
+    <footer>
+        <a href="https://github.com/MARGOOOO"><i class="fab fa-github"></i></a>
+        <a href="https://dribbble.com/margooo"><i class="fas fa-basketball-ball"></i></a>
+        <p>© 2020</p>
+    </footer>
+
+</body>
+
+</html>
